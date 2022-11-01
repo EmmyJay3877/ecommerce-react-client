@@ -41,7 +41,7 @@ const Chat = () => {
     }
   }, []);
 
-  const changeLoc = () => window.location.assign('http://127.0.0.1:3000')
+  const changeLoc = () => window.location.assign("/")
   
   useEffect(() => {
 
