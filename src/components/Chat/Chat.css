@@ -19,7 +19,7 @@
 
 @media (min-width: 700px) {
   .outerContainer {
-    min-height: 100vh;
+    min-height: fit-content;
     width: 100%;
   }
 
