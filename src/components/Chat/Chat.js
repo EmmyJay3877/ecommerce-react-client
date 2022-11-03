@@ -47,12 +47,12 @@ const Chat = () => {
 
     socket.on('message', message => {
       setMessages(messages => [ ...messages, message ]);
-      console.log(messages)
+      // console.log(messages)
     });
     
     socket.on("roomdata", ( {users} ) => {
       setUsers(users);
-      console.log(users)
+      // console.log(users)
     });
 }, []);
 
