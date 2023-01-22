@@ -19,7 +19,7 @@ export const StateProvider = ({children})=>{
     const handleClose = ()=> {
       setShow(false);
       sessionStorage.removeItem('token')
-      window.location.href = `https://gilded-biscotti-09800a.netlify.app/login/`
+      window.location.href = `${process.env.REACT_APP_HOST}/login/`
     }
 
     const checkInterVal = ()=>{
@@ -164,7 +164,7 @@ export const StateProvider = ({children})=>{
                 setRes('')
                 const token = data.access_token
                 sessionStorage.setItem('token', token)
-                window.location.href = `http://localhost:3000/customer/`;
+                window.location.href = `${process.env.REACT_APP_HOST}customer/`;
             }
             else if('detail' in data){
                 setRes(data.detail)
@@ -265,7 +265,7 @@ export const StateProvider = ({children})=>{
 
                     sessionStorage.setItem('token', token)
 
-                    window.location.href = 'https://main--gilded-biscotti-09800a.netlify.app/emailmsg/';
+                    window.location.href = `${process.env.REACT_APP_HOST}/emailmsg/`;
                 }
                 );
             }
@@ -303,7 +303,7 @@ export const StateProvider = ({children})=>{
                 const data = await res.json()
                 const statusCode = await res.status
                 if (statusCode === 201 && 'data' in data) {
-                    window.location.href = 'https://gilded-biscotti-09800a.netlify.app/customer/';
+                    window.location.href = `${process.env.REACT_APP_HOST}/customer/`;
                 }
             } catch (error) {
                 setRes(errorMsg)
@@ -330,7 +330,7 @@ export const StateProvider = ({children})=>{
                 else if(statusCode===401) setShow(true)
             } catch (error){
                 alert('An error has occured')
-                window.location.href = `http://localhost:3000/customer/`;
+                window.location.href = `${process.env.REACT_APP_HOST}/customer/`;
             }
         }
         getCustomerProfile()
@@ -404,7 +404,7 @@ export const StateProvider = ({children})=>{
             message => {
                 console.log(message)
                 setTimeout(() => {
-                    window.location.href = `https://gilded-biscotti-09800a.netlify.app/verifycode/?id=${data.id}`;
+                    window.location.href = `${process.env.REACT_APP_HOST}/verifycode/?id=${data.id}`;
                 }, 6000);
             }
             );
@@ -520,7 +520,7 @@ export const StateProvider = ({children})=>{
                 setRes('')
                 const token = data.access_token
                 sessionStorage.setItem('token', token)
-                window.location.href = 'https://gilded-biscotti-09800a.netlify.app/resetpassword/';
+                window.location.href = `${process.env.REACT_APP_HOST}/resetpassword/`;
             }
             else if ('detail' in data){
                 setRes(data.detail)
@@ -608,7 +608,7 @@ export const StateProvider = ({children})=>{
                 if (statusCode === 200 && 'data' in data) {
                     if(loggedIn===false){
                         sessionStorage.removeItem('token')
-                        window.location.href = 'http://localhost:3000/login/';
+                        window.location.href = `${process.env.REACT_APP_HOST}/login/`;
                     } else{
                         setPswrdResponse(data.data)
                         setTimeout(() => {

@@ -9,7 +9,7 @@ const EmailMsg = () => {
 
     useEffect(()=>{
       setTimeout(() => {
-        window.location.href = 'https://gilded-biscotti-09800a.netlify.app/signup/';
+        window.location.href = `${process.env.REACT_APP_HOST}/signup/`;
       }, 15000);
     }, [])
 
