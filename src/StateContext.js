@@ -19,7 +19,7 @@ export const StateProvider = ({children})=>{
     const handleClose = ()=> {
       setShow(false);
       sessionStorage.removeItem('token')
-      window.location.href = `http://localhost:3000/login/`
+      window.location.href = `https://gilded-biscotti-09800a.netlify.app/login/`
     }
 
     const checkInterVal = ()=>{

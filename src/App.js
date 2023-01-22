@@ -22,20 +22,20 @@ const App = () => {
     <StateProvider>
     <Router>
       <Routes>
-      <Route path="https://gilded-biscotti-09800a.netlify.app/" exact element={<HomePage/>} />
-      <Route path="https://gilded-biscotti-09800a.netlify.app/login" element={<Login/>} />
-      <Route path="https://gilded-biscotti-09800a.netlify.app/signup" element={<Signup/>} />
-      <Route path="https://gilded-biscotti-09800a.netlify.app/itemdetails" element={<ItemDetails/>} />
-      <Route path='https://gilded-biscotti-09800a.netlify.app/customer' element={<Customer/>}>
-      <Route index path="https://gilded-biscotti-09800a.netlify.app/customer/*" element={<Dashboard/>} />
-      <Route path='https://gilded-biscotti-09800a.netlify.app/customer/profile' element={<Profile/>} />
+      <Route path="/" exact element={<HomePage/>} />
+      <Route path="/login" element={<Login/>} />
+      <Route path="/signup" element={<Signup/>} />
+      <Route path="/itemdetails" element={<ItemDetails/>} />
+      <Route path='/customer' element={<Customer/>}>
+      <Route index path="/customer/*" element={<Dashboard/>} />
+      <Route path='/customer/profile' element={<Profile/>} />
       </Route>
-      <Route path='https://gilded-biscotti-09800a.netlify.app/completesignup/*' element={<CompleteSignup/>} />
-      <Route path='https://gilded-biscotti-09800a.netlify.app/emailmsg' element={<EmailMsg/>} />
-      <Route path='https://gilded-biscotti-09800a.netlify.app/proceed/*' element={<Proceed/>} />
-      <Route path='https://gilded-biscotti-09800a.netlify.app/forgetpassword' element={<ForgetPassword/>} />
-      <Route path='https://gilded-biscotti-09800a.netlify.app/verifycode/*' element={<VerifyCode/>} />
-      <Route path='https://gilded-biscotti-09800a.netlify.app/resetpassword' element={<ResetPassword/>} />
+      <Route path='/completesignup/*' element={<CompleteSignup/>} />
+      <Route path='/emailmsg' element={<EmailMsg/>} />
+      <Route path='/proceed/*' element={<Proceed/>} />
+      <Route path='/forgetpassword' element={<ForgetPassword/>} />
+      <Route path='/verifycode/*' element={<VerifyCode/>} />
+      <Route path='/resetpassword' element={<ResetPassword/>} />
       </Routes>
     </Router>
     </StateProvider>
