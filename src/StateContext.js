@@ -183,7 +183,6 @@ export const StateProvider = ({children})=>{
                     'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                 }
             })
-            const data = await res.json()
             const statusCode = await res.status
             if (statusCode!==200) {
                 setShow(true)
