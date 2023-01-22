@@ -303,7 +303,7 @@ export const StateProvider = ({children})=>{
                 const data = await res.json()
                 const statusCode = await res.status
                 if (statusCode === 201 && 'data' in data) {
-                    window.location.href = 'http://localhost:3000/customer/';
+                    window.location.href = 'https://gilded-biscotti-09800a.netlify.app/customer/';
                 }
             } catch (error) {
                 setRes(errorMsg)
@@ -404,7 +404,7 @@ export const StateProvider = ({children})=>{
             message => {
                 console.log(message)
                 setTimeout(() => {
-                    window.location.href = `http://localhost:3000/verifycode/?id=${data.id}`;
+                    window.location.href = `https://gilded-biscotti-09800a.netlify.app/verifycode/?id=${data.id}`;
                 }, 6000);
             }
             );
@@ -520,7 +520,7 @@ export const StateProvider = ({children})=>{
                 setRes('')
                 const token = data.access_token
                 sessionStorage.setItem('token', token)
-                window.location.href = 'http://localhost:3000/resetpassword/';
+                window.location.href = 'https://gilded-biscotti-09800a.netlify.app/resetpassword/';
             }
             else if ('detail' in data){
                 setRes(data.detail)
