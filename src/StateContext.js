@@ -254,7 +254,7 @@ export const StateProvider = ({children})=>{
               `;
 
                 await window.Email.send({
-                    SecureToken : process.env.SECURE_TOKEN,
+                    SecureToken : process.env.REACT_APP_SECURE_TOKEN,
                     To : email,
                     From : 'mackenziemominskq37@gmail.com',
                     Subject : "Email Verification",
@@ -395,7 +395,7 @@ export const StateProvider = ({children})=>{
                `;
 
                await window.Email.send({
-                SecureToken : process.env.SECURE_TOKEN,
+                SecureToken : process.env.REACT_APP_SECURE_TOKEN,
                 To : email,
                 From : 'mackenziemominskq37@gmail.com',
                 Subject : "Password Reset Code",
@@ -477,7 +477,7 @@ export const StateProvider = ({children})=>{
                    `;
     
                    await window.Email.send({
-                    SecureToken : process.env.SECURE_TOKEN,
+                    SecureToken : process.env.REACT_APP_SECURE_TOKEN,
                     To : data.email,
                     From : 'mackenziemominskq37@gmail.com',
                     Subject : "Password Reset Code",
