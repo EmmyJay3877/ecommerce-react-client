@@ -164,7 +164,7 @@ export const StateProvider = ({children})=>{
                 setRes('')
                 const token = data.access_token
                 sessionStorage.setItem('token', token)
-                window.location.href = `${process.env.REACT_APP_HOST}customer/`;
+                window.location.href = `${process.env.REACT_APP_HOST}/customer/`;
             }
             else if('detail' in data){
                 setRes(data.detail)
