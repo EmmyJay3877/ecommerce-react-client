@@ -18,7 +18,7 @@ import Customer from './components/dashboard/Customer';
 
 const App = () => {
   console.log(process.env.SECURE_TOKEN);
-  console.log(CI);
+  console.log(process.env.CI);
   return (
     <StateProvider>
     <Router>
