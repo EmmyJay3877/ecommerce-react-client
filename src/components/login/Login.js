@@ -3,11 +3,12 @@ import { useStateContext } from '../../StateContext'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import LoadingIcon from '../LoadingIcon'
 
 
 const Login = () => {
 
-  const { response, login, setRes } = useStateContext()
+  const { response, login, setRes, setShowLoading, showLoading } = useStateContext()
 
   const [formData, setFormData] = useState({
     email: '',
@@ -16,6 +17,7 @@ const Login = () => {
 
   useEffect(()=>{
     setRes()
+    setShowLoading(false)
   }, [])
 
   const [errors, setErrors] = useState({});
@@ -30,9 +32,11 @@ const Login = () => {
 
     const newErrors = {}
     if (formData.password.length === 0) {
+      setShowLoading(false)
       newErrors.password = 'This feild is required';
     }
     if (formData.email.length === 0) {
+      setShowLoading(false)
       newErrors.email = 'This feild is required';
     }
     setErrors(newErrors);
@@ -49,7 +53,6 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
-
     <h1 className="font-bold text-2xl">Welcome Back</h1>
     <form className="flex flex-col bg-white rounded shadow-lg p-12 mt-12">
         {
@@ -84,11 +87,11 @@ const Login = () => {
       <button 
       className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
       onClick={(e) =>{
-        setRes('Loading...')
+        setShowLoading(true)
         handleSubmit(e)
       }}
       type='submit'
-      >Login</button>
+      >{showLoading===true ? <LoadingIcon/> : 'Login'}</button>
       <div className="flex mt-6 justify-center text-xs">
         <Link to={'/forgetpassword'}>
         <button className="text-blue-400 hover:text-blue-500 cursor-pointer">Forgot Password</button>

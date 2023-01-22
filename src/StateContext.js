@@ -15,6 +15,7 @@ export const StateProvider = ({children})=>{
     const [pswrdResponse, setPswrdResponse] = useState()
     const [show, setShow] = useState(false);
     const [interValId, setIntervalId] = useState(null)
+    const [showLoading, setShowLoading] = useState(false)
 
     const handleClose = ()=> {
       setShow(false);
@@ -161,7 +162,7 @@ export const StateProvider = ({children})=>{
             const data = await res.json()
             const statusCode = await res.status
             if(statusCode === 200 && data.access_token !== undefined){
-                setRes('')
+                setShowLoading(false)
                 const token = data.access_token
                 sessionStorage.setItem('token', token)
                 window.location.href = `${process.env.REACT_APP_HOST}/customer/`;
@@ -212,7 +213,6 @@ export const StateProvider = ({children})=>{
             const data = await res.json()
             const statusCode = await res.status;
             if (statusCode === 201 && data.access_token !== undefined) {
-                setRes()
                 const token = data.access_token
                 const emailVerificationTemplate = `
                 <!DOCTYPE html>
@@ -262,6 +262,8 @@ export const StateProvider = ({children})=>{
                 }).then(
                 message => {
                     console.log(message)
+
+                    setShowLoading(false)
 
                     sessionStorage.setItem('token', token)
 
@@ -721,7 +723,9 @@ export const StateProvider = ({children})=>{
         handleClose,
         checkInterVal,
         show,
-        setQty
+        setQty,
+        showLoading, 
+        setShowLoading
       }}
     >
             {children}

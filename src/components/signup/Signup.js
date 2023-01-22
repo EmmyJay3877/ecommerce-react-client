@@ -3,11 +3,12 @@ import { useState } from 'react';
 import { useStateContext } from '../../StateContext'
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import LoadingIcon from '../LoadingIcon';
 
 
 const Signup = () => {
 
-  const { response, signup, setRes } = useStateContext()
+  const { response, signup, setRes, setShowLoading, showLoading } = useStateContext()
 
     const [formData, setFormData] = useState({
       username: '',
@@ -18,6 +19,7 @@ const Signup = () => {
 
     useEffect(()=>{
       setRes()
+      setShowLoading(false)
     }, [])
   
     const [errors, setErrors] = useState({});
@@ -33,9 +35,11 @@ const Signup = () => {
       // Validate the form data
       const newErrors = {};
       if (formData.password !== formData.confirmPassword) {
+        setShowLoading(false)
         newErrors.confirmPassword = 'Passwords do not match';
       }
       if (formData.password.length < 8) {
+        setShowLoading(false)
         newErrors.password = 'Password must be at least 8 characters long';
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -114,11 +118,11 @@ const Signup = () => {
       <button 
       className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-6 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
       onClick={(e) =>{
-        setRes('Loading...')
+        setShowLoading(true)
         handleSubmit(e)
       }}
       type='submit'
-      >Sign up</button>
+      >{showLoading===true ? <LoadingIcon/> : 'Signup'}</button>
       <div className="flex mt-6 justify-center text-xs">
         <a className="text-black">Already have an account?  </a>
         &nbsp;

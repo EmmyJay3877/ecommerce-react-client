@@ -4,10 +4,14 @@ import '../index.css'
 import Item from './Item'
 import { useState, useEffect } from 'react'
 import FooterBanner from './FooterBanner'
+import { useStateContext } from '../StateContext'
 
 
 
 const Body = () => {
+
+  const {setShowLoading} = useStateContext()
+  
     const [itemCards, setItemCards] = useState([])
 
     useEffect(()=>{
@@ -16,6 +20,7 @@ const Body = () => {
         const data = await res.json()
         const items = data.slice(0, 5);
         setItemCards(items);
+        setShowLoading(false)
       }
 
       getItems()
