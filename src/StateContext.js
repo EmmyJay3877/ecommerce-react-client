@@ -1,5 +1,6 @@
 import React from 'react'
 import { createContext, useContext, useState, useEffect } from 'react'
+require('dotenv-webpack').config()
 
 const StateContext = createContext();
 
