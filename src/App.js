@@ -17,6 +17,7 @@ import ResetPassword from './components/login/ResetPassword';
 import Customer from './components/dashboard/Customer';
 
 const App = () => {
+  console.log(process.env);
   return (
     <StateProvider>
     <Router>
