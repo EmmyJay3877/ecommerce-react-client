@@ -265,7 +265,7 @@ export const StateProvider = ({children})=>{
 
                     sessionStorage.setItem('token', token)
 
-                    window.location.href = 'http://localhost:3000/emailmsg/';
+                    window.location.href = 'https://main--gilded-biscotti-09800a.netlify.app/emailmsg/';
                 }
                 );
             }
