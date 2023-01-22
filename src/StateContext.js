@@ -236,7 +236,7 @@ export const StateProvider = ({children})=>{
                               <td bgcolor="#ffffff" style="padding: 40px;">
                               <p style="color: #666666; font-size: 16px; font-family: Arial, sans-serif;">Hey ${username}</p>
                                 <p style="color: #666666; font-size: 16px; font-family: Arial, sans-serif;">Thank you for signing up for our service. Please click the link below to verify your email address:</p>
-                                <a href="http://localhost:3000/proceed/?token=${token}" style="color: #0000ff; font-family: Arial, sans-serif;">Verify my email</a>
+                                <a href="${process.env.REACT_APP_HOST}/proceed/?token=${token}" style="color: #0000ff; font-family: Arial, sans-serif;">Verify my email</a>
                               </td>
                             </tr>
                             <!-- Footer -->
