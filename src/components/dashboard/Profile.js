@@ -4,7 +4,7 @@ import DashboardNavBar from './DashboardNavBar'
 import { useStateContext } from '../../StateContext'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import LoadingIcon from '../LoadingIcon'
+import LoadingModal from '../LoadingModal'
 
 const Profile = () => {
 
@@ -87,6 +87,7 @@ const Profile = () => {
 
   return (
     <div>
+      <LoadingModal/>
         <div>
             <DashboardNavBar />
         </div>
@@ -210,7 +211,7 @@ const Profile = () => {
                   onClick={e=>{
                     handleSubmit(e)
                   }}
-                  >{showLoading===true ? <LoadingIcon/> : 'Update'}</button>
+                  >Update</button>
                 </div>
               </div>
             </div>
@@ -270,7 +271,7 @@ const Profile = () => {
                   type='submit' 
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   onClick={e=>handlePasswordChange(e)}
-                  >{showLoading===true ? <LoadingIcon/> : 'Update'}</button>
+                  >Update</button>
                 </div>
               </div>
             </div>
