@@ -41,7 +41,7 @@ export const StateProvider = ({children})=>{
         let token_data = sessionStorage.getItem('token')
         const createOrder = async () => {
             try {
-                const res = await fetch(`https://ecommerce-fastapi-server.onrender.com/orders/${itemId}/${quantity}`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER}/orders/${itemId}/${quantity}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export const StateProvider = ({children})=>{
         let token_data = sessionStorage.getItem('token')
         const deleteOrder = async () => {
             try{
-                const res = await fetch(`https://ecommerce-fastapi-server.onrender.com/orders/${orderId}`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER}/orders/${orderId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ export const StateProvider = ({children})=>{
         let token_data = sessionStorage.getItem('token')
         const getOrder = async () => {
             try{
-                const res = await fetch(`https://ecommerce-fastapi-server.onrender.com/orders/`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER}/orders/`, {
                     headers: {
                         'Authorization': `Bearer ${token_data}`
                     }
@@ -121,7 +121,7 @@ export const StateProvider = ({children})=>{
     const updateOrderItemQty = async (id, quantity) => {
         let token_data = sessionStorage.getItem('token')
         try {
-            const res = await fetch(`https://ecommerce-fastapi-server.onrender.com/orders/orderitem/${id}/${quantity}`, {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/orders/orderitem/${id}/${quantity}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ export const StateProvider = ({children})=>{
             password: password,
           };
         try {
-            const res = await fetch(`https://ecommerce-fastapi-server.onrender.com/login/`, {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/login/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -179,7 +179,7 @@ export const StateProvider = ({children})=>{
 
     const verifyToken = async () => {
         try {
-            const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/check-token/', {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/check-token/`, {
                 headers: {
                     'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                 }
@@ -199,7 +199,7 @@ export const StateProvider = ({children})=>{
         const email = event.target.form.elements.email.value;
         const password = event.target.form.elements.password.value;
         try{
-            const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/', {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -290,7 +290,7 @@ export const StateProvider = ({children})=>{
         sessionStorage.setItem('token', token_data)
         const createProfile = async ()=>{
             try{
-                const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/profile/', {
+                const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/profile/`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -320,7 +320,7 @@ export const StateProvider = ({children})=>{
         let token_data = sessionStorage.getItem('token')
         const getCustomerProfile = async()=>{
             try{
-                const res = await fetch(`https://ecommerce-fastapi-server.onrender.com/customers/get_profile`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/get_profile`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token_data}`
@@ -342,7 +342,7 @@ export const StateProvider = ({children})=>{
         event.preventDefault()
         const email = event.target.form.elements.email.value;
         try {
-            const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/verify/', {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/verify/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -405,6 +405,7 @@ export const StateProvider = ({children})=>{
             }).then(
             message => {
                 console.log(message)
+                setShowLoading(false)
                 setTimeout(() => {
                     window.location.href = `${process.env.REACT_APP_HOST}/verifycode/?id=${data.id}`;
                 }, 6000);
@@ -424,7 +425,7 @@ export const StateProvider = ({children})=>{
     const resendCode = async (event, id) => {
         event.preventDefault()
         try {
-                const res = await fetch(`https://ecommerce-fastapi-server.onrender.com/customers/resend/`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/resend/`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -488,6 +489,8 @@ export const StateProvider = ({children})=>{
                 async message =>{ 
                     console.log(message)
 
+                    setShowLoading(false)
+
                     await deleteCode(id)
                 }
                 );
@@ -507,7 +510,7 @@ export const StateProvider = ({children})=>{
         event.preventDefault()
         const code = event.target.form.elements.code.value;
         try {
-            const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/verify_code/', {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/verify_code/`, {
                 method: 'POST',
                 body: JSON.stringify({
                     "code": code
@@ -536,7 +539,7 @@ export const StateProvider = ({children})=>{
 
     const deleteCode = async (id) => {
         try {
-            const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/delete_code/', {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/delete_code/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -564,7 +567,7 @@ export const StateProvider = ({children})=>{
         let token_data = sessionStorage.getItem('token')
         const putProfile = async ()=>{
             try{
-                const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/profile/update/', {
+                const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/profile/update/`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -578,8 +581,14 @@ export const StateProvider = ({children})=>{
                 })
                 const data = await res.json()
                 const statusCode = await res.status
-                if (statusCode === 200 && data) setRes(data.data)
-                else if(statusCode===401) setShow(true)
+                if (statusCode === 200 && data){
+                    setShowLoading(false)
+                     setRes(data.data)
+                    }
+                else if(statusCode===401) {
+                    setShowLoading(false)
+                    setShow(true)
+                }
             } catch (error) {
                 setRes(`${errorMsg}. Could not update profile`)
                 responseTimeOut()
@@ -595,7 +604,7 @@ export const StateProvider = ({children})=>{
         let token_data = sessionStorage.getItem('token');
         const putNewPassword = async ()=>{
             try{
-                const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/update_password/', {
+                const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/update_password/`, {
                     method: 'PUT',
                     body: JSON.stringify({
                         'password': password
@@ -609,9 +618,11 @@ export const StateProvider = ({children})=>{
                 const statusCode =  await res.status
                 if (statusCode === 200 && 'data' in data) {
                     if(loggedIn===false){
+                        setShowLoading(false)
                         sessionStorage.removeItem('token')
                         window.location.href = `${process.env.REACT_APP_HOST}/login/`;
                     } else{
+                        setShowLoading(false)
                         setPswrdResponse(data.data)
                         setTimeout(() => {
                             setPswrdResponse('')

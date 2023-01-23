@@ -3,10 +3,11 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useStateContext } from '../../StateContext'
+import LoadingIcon from '../LoadingIcon'
 
 const VerifyCode = () => {
 
-    const {checkCode, response, setRes, resendCode, deleteCode} = useStateContext()
+    const {checkCode, response, setRes, resendCode, deleteCode, setShowLoading, showLoading} = useStateContext()
 
     const [searchparams] = useSearchParams()
     const id = searchparams.get('id')
@@ -14,6 +15,7 @@ const VerifyCode = () => {
     useEffect(()=>{
         setRes()
         deleteCode(id)
+        setShowLoading(false)
     }, [])
 
     const [code, setCode] = useState('')
@@ -37,6 +39,7 @@ const VerifyCode = () => {
     
         // If there are no errors, submit the form data
         if (newError === '') {
+          setShowLoading(true)
           // Submit the form data here
           await checkCode(event, id)
           let inputs = document.querySelectorAll("input")
@@ -74,10 +77,7 @@ const VerifyCode = () => {
       type='submit'
       >Proceed</button>
       <div className="flex mt-6 justify-center text-xs">
-        <button type='submit' onClick={e=> {
-          setRes('Loading...')
-          resendCode(e, id)
-          }} className="text-blue-400 hover:text-blue-500 cursor-pointer">Resend Code</button>
+        <button type='submit' onClick={e=>resendCode(e, id)} className="text-blue-400 hover:text-blue-500 cursor-pointer">{showLoading===true ? <LoadingIcon/> : 'Resend Code'}</button>
       </div>
     </form>
   

@@ -9,7 +9,7 @@ const Banner = () => {
 
     const getItem = async ()=>{
       try {
-        const res = await fetch('https://ecommerce-fastapi-server.onrender.com/items/')
+        const res = await fetch(`${process.env.REACT_APP_SERVER}/items/`)
         const data = await res.json()
         setBannerdate(data[0]) 
       } catch (error) {

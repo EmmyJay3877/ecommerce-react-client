@@ -4,15 +4,16 @@ import DashboardNavBar from './DashboardNavBar'
 import { useStateContext } from '../../StateContext'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ToastContainer , toast } from 'react-toastify';
+import LoadingIcon from '../LoadingIcon'
 
 const Profile = () => {
 
-    const { updateProfile, updatePassword, pswrdResponse, setPswrdResponse, setRes, response } = useStateContext()
+    const { updateProfile, updatePassword, pswrdResponse, setPswrdResponse, setRes, response, showLoading, setShowLoading } = useStateContext()
 
     useEffect(()=>{
       setPswrdResponse()
       setRes()
+      setShowLoading(false)
     }, [])
 
     const [ formData, setFormData ] = useState({
@@ -32,7 +33,6 @@ const Profile = () => {
 
     const handleSubmit = async(event)=>{
         event.preventDefault()
-
         const newErrors = {}
         if (formData.phone.length < 3){
             newErrors.phone = 'Phone number must be at least 6 characters'
@@ -46,6 +46,7 @@ const Profile = () => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
+            setShowLoading(true)
             // Submit the form data here
             await updateProfile(event)
         }   
@@ -58,7 +59,6 @@ const Profile = () => {
 
     const handlePasswordChange = async(event)=>{
       event.preventDefault();
-  
       // Validate the form data
       const newErrors = {};
       if (formData.newPassword.length < 8) {
@@ -71,6 +71,7 @@ const Profile = () => {
 
       // If there are no errors, submit the form data
       if (Object.keys(newErrors).length === 0) {
+        setShowLoading(true)
         // Submit the form data here
         await updatePassword(event)
       }
@@ -206,8 +207,10 @@ const Profile = () => {
                   <button 
                   type='submit' 
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={e=>handleSubmit(e)}
-                  >Update</button>
+                  onClick={e=>{
+                    handleSubmit(e)
+                  }}
+                  >{showLoading===true ? <LoadingIcon/> : 'Update'}</button>
                 </div>
               </div>
             </div>
@@ -267,7 +270,7 @@ const Profile = () => {
                   type='submit' 
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   onClick={e=>handlePasswordChange(e)}
-                  >Update</button>
+                  >{showLoading===true ? <LoadingIcon/> : 'Update'}</button>
                 </div>
               </div>
             </div>
@@ -279,7 +282,6 @@ const Profile = () => {
 </div>
 </div>
 </form>
-<ToastContainer/>
 </div>
   )
 }

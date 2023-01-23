@@ -9,20 +9,21 @@ import { useStateContext } from '../../StateContext';
 
 const Dashboard = () => {
 
-  const { setLoggedin, customer, fetchCustomer, errorMsg } = useStateContext()
+  const { setLoggedin, customer, fetchCustomer, errorMsg, setShowLoading } = useStateContext()
 
   const [itemCards, setItemCards] = useState([])
   
   useEffect(()=>{
     const getItems = async () => {
       try {
-        const res = await fetch("https://ecommerce-fastapi-server.onrender.com/items/")
+        const res = await fetch(`${process.env.REACT_APP_SERVER}/items/`)
         const data = await res.json()
         const statusCode = await res.status
         if (statusCode===200){
           setItemCards(data);
           setLoggedin(true)
           fetchCustomer()
+          setShowLoading(false)
         }
       }catch(error){
         alert(errorMsg)

@@ -16,7 +16,7 @@ const Body = () => {
 
     useEffect(()=>{
       const getItems = async () => {
-        const res = await fetch("https://ecommerce-fastapi-server.onrender.com/items/")
+        const res = await fetch(`${process.env.REACT_APP_SERVER}/items/`)
         const data = await res.json()
         const items = data.slice(0, 5);
         setItemCards(items);

@@ -32,17 +32,16 @@ const Login = () => {
 
     const newErrors = {}
     if (formData.password.length === 0) {
-      setShowLoading(false)
       newErrors.password = 'This feild is required';
     }
     if (formData.email.length === 0) {
-      setShowLoading(false)
       newErrors.email = 'This feild is required';
     }
     setErrors(newErrors);
 
     // If there are no errors, submit the form data
     if (Object.keys(newErrors).length === 0) {
+      setShowLoading(true)
       // Submit the form data here
       await login(event)
       setFormData({email: '', password: ''})
@@ -86,10 +85,7 @@ const Login = () => {
       )}
       <button 
       className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
-      onClick={(e) =>{
-        setShowLoading(true)
-        handleSubmit(e)
-      }}
+      onClick={(e) =>handleSubmit(e)}
       type='submit'
       >{showLoading===true ? <LoadingIcon/> : 'Login'}</button>
       <div className="flex mt-6 justify-center text-xs">

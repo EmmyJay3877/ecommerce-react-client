@@ -2,13 +2,15 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useStateContext } from '../../StateContext'
+import LoadingIcon from '../LoadingIcon'
 
 const ResetPassword = () => {
     
-  const { updatePassword, response, setRes } = useStateContext()
+  const { updatePassword, response, setRes, setShowLoading, showLoading } = useStateContext()
 
   useEffect(()=>{
     setRes()
+    setShowLoading(false)
   }, [])
 
     const [ formData, setFormData ] = useState({
@@ -38,6 +40,7 @@ const ResetPassword = () => {
   
         // If there are no errors, submit the form data
         if (Object.keys(newErrors).length === 0) {
+          setShowLoading(true)
           // Submit the form data here
           await updatePassword(event)
           let inputs = document.querySelectorAll("input")
@@ -80,12 +83,9 @@ const ResetPassword = () => {
       )}
       <button 
       className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
-      onClick={(e) => {
-        setRes('Loading...')
-        handleSubmit(e)
-      }}
+      onClick={(e) =>handleSubmit(e)}
       type='submit'
-      >Proceed</button>
+      >{showLoading===true ? <LoadingIcon/> : 'Proceed'}</button>
     </form>
   
   </div>

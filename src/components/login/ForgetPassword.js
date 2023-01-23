@@ -2,13 +2,15 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useStateContext } from '../../StateContext'
+import LoadingIcon from '../LoadingIcon'
 
 const ForgetPassword = () => {
 
-    const {checkEmail, response, setRes} = useStateContext()
+    const {checkEmail, response, setRes, showLoading, setShowLoading} = useStateContext()
 
     useEffect(()=>{
         setRes()
+        setShowLoading(false)
     }, [])
 
     const [email, setEmail] = useState('')
@@ -32,6 +34,7 @@ const ForgetPassword = () => {
     
         // If there are no errors, submit the form data
         if (newError === '') {
+          setShowLoading(true)
           // Submit the form data here
           await checkEmail(event)
           let inputs = document.querySelectorAll("input")
@@ -62,12 +65,9 @@ const ForgetPassword = () => {
       )}
       <button 
       className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
-      onClick={(e) => {
-        setRes('Loading...')
-        handleSubmit(e)
-      }}
+      onClick={(e) => handleSubmit(e)}
       type='submit'
-      >Proceed</button>
+      >{showLoading===true ? <LoadingIcon/> : 'Proceed'}</button>
     </form>
   
   </div>

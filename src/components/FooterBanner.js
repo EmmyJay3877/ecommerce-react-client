@@ -8,7 +8,7 @@ const FooterBanner = () => {
   const [footerBanner, setFooterBanner] = useState([])
 
   const getItem = ()=>{
-    fetch('https://ecommerce-fastapi-server.onrender.com/items/')
+    fetch(`${process.env.REACT_APP_SERVER}/items/`)
     .then(res=>res.json())
     .then(data=>setFooterBanner(data[3]))
 }

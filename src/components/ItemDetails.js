@@ -11,10 +11,11 @@ import 'react-toastify/dist/ReactToastify.css'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import DashboardNavBar from './dashboard/DashboardNavBar'
+import LoadingModal from './LoadingModal'
 
 const ItemDetails = () => {
 
-  const { qty, onAdd, loggedIn, incQty, decQty, updateTotalPriceAndQuantity, response, setRes, errorMsg, setShowCart, setQty } = useStateContext();
+  const { qty, onAdd, loggedIn, incQty, decQty, updateTotalPriceAndQuantity, response, setRes, errorMsg, setShowCart, setQty, setShowLoading } = useStateContext();
 
   
   const [ itemDetails, setItemDetails] = useState([])
@@ -27,15 +28,19 @@ const ItemDetails = () => {
   useEffect(()=>{
     setRes()
     setQty(1)
+    setShowLoading(true)
   }, [id])
 
   useEffect(()=>{
     const getItemDetails = async () => {
       try {
-        const res = await fetch(`https://ecommerce-fastapi-server.onrender.com/items/${id}`)
+        const res = await fetch(`${process.env.REACT_APP_SERVER}/items/${id}`)
         const data = await res.json()
         const statusCode = await res.status
-        if (statusCode === 200) setItemDetails(data);
+        if (statusCode === 200){
+          setShowLoading(false)
+          setItemDetails(data)
+          };
       } catch (error) {
         alert(errorMsg)
       }
@@ -48,7 +53,7 @@ const ItemDetails = () => {
   useEffect(()=>{
     const getItems = async () => {
       try{
-        const res = await fetch("https://ecommerce-fastapi-server.onrender.com/items/")
+        const res = await fetch(`${process.env.REACT_APP_SERVER}/items/`)
         const data = await res.json()
         const statusCode = await res.status;
         if (statusCode === 200) setItemCards(data);
@@ -61,6 +66,7 @@ const ItemDetails = () => {
 
   return (
     <div>
+      <LoadingModal/>
       <div>
       {
         loggedIn === false ? <Navbar /> : <DashboardNavBar />

@@ -3,10 +3,15 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useStateContext } from '../../StateContext'
+import LoadingModal from '../LoadingModal'
 
 const Proceed = () => {
-
-    const {errorMsg} = useStateContext()
+    
+    const {errorMsg, setShowLoading} = useStateContext()
+    
+    useEffect(()=>{
+          setShowLoading(true)
+        }, [])
 
     const [status, setStatus] = useState()
 
@@ -15,13 +20,16 @@ const Proceed = () => {
 
     const verifyEmail = async () => {
         try{
-            const res = await fetch('https://ecommerce-fastapi-server.onrender.com/customers/verify_email/', {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/verify_email/`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token_data}`
                 }
             })
             const statusCode = await res.status
+            if (statusCode) {
+                setShowLoading(false)
+            }
             setStatus(statusCode)
         } catch (error) {
             alert(errorMsg)
@@ -34,6 +42,7 @@ const Proceed = () => {
 
   return (
     <div>
+        <LoadingModal/>
         {
             status === 200 ? 
             <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-6 sm:py-12 bg-white">
