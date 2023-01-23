@@ -5,6 +5,7 @@ import Footer from '../Footer';
 import Item from '../Item';
 import { useState, useEffect } from 'react';
 import { useStateContext } from '../../StateContext';
+import LoadingModal from '../LoadingModal';
 
 
 const Dashboard = () => {
@@ -32,8 +33,13 @@ const Dashboard = () => {
     getItems()
   }, [])
 
+  useEffect(()=>{
+    setShowLoading(true)
+  }, [])
+
   return (
     <div>
+      <LoadingModal/>
       <header>
         <DashboardNavBar/>
       </header>
