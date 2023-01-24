@@ -5,6 +5,7 @@ import { useStateContext } from '../../StateContext'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { GrUpdate } from 'react-icons/gr'
 
 const DashboardNavBar = () => {
 
@@ -31,7 +32,7 @@ const DashboardNavBar = () => {
       <div className="navbar-overlay" onClick={toggleMenuOpen}></div>
 
       <button type="button" className="navbar-burger" onClick={toggleMenuOpen}>
-        <span className="material-icons border-t-2 border-b-2 border-red-500"><GiHamburgerMenu/></span>
+        <span className="material-icon"><GiHamburgerMenu size={30}/></span>
       </button>
       <Link to={"/customer"}>
       <h1 className="navbar-title">Dynamic Headphones</h1>
@@ -40,9 +41,12 @@ const DashboardNavBar = () => {
         <Link to={'/'}>
         <button type="button" className='active' onClick={removeToken}>Logout</button>
         </Link>
+        <div className='flex justify-center items-center lg:hidden'>
+          <div><GrUpdate/></div>
         <Link to={'/customer/profile'}>
         <button type="button" className="active">Update Profile</button>
         </Link>
+        </div>
         <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
         <svg 
         className="h-8 p-0 text-red-700 hover:text-green-500 duration-200 svg-inline--fa fa-shopping-cart fa-w-18 fa-7x" 
