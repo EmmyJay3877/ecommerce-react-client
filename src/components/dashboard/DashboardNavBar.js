@@ -4,6 +4,7 @@ import Cart from "../Cart"
 import { useStateContext } from '../../StateContext'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import { GiHamburgerMenu } from 'react-icons/gi'
 
 const DashboardNavBar = () => {
 
@@ -30,7 +31,7 @@ const DashboardNavBar = () => {
       <div className="navbar-overlay" onClick={toggleMenuOpen}></div>
 
       <button type="button" className="navbar-burger" onClick={toggleMenuOpen}>
-        <span className="material-icons border-t-2 border-b-2 border-red-500">menu</span>
+        <span className="material-icons border-t-2 border-b-2 border-red-500"><GiHamburgerMenu/></span>
       </button>
       <Link to={"/customer"}>
       <h1 className="navbar-title">Dynamic Headphones</h1>
