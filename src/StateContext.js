@@ -281,6 +281,29 @@ export const StateProvider = ({children})=>{
         }
     }
 
+    const checkOut = async (event) => {
+        event.preventDefault()
+        let token_data = sessionStorage.getItem('token')
+        try {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/create-stripe-checkout`, {
+                method: "POST",
+                headers: {
+                    'Authorization': `Bearer ${token_data}`
+                }
+            })
+            const data = await res.json()
+            const statusCode = await res.status
+            if (statusCode === 201){
+                setShowLoading(false)
+                window.location.href = data
+            } else if (statusCode !== 201 && 'detail' in data) {
+                setShowLoading(false)
+                alert(data['detail'])
+            }
+        } catch (error) {
+            alert(errorMsg)
+        }
+    }
 
     const completeSignup = (event, token_data)=>{
         event.preventDefault()
@@ -314,7 +337,6 @@ export const StateProvider = ({children})=>{
         }
         createProfile()
     }
-
 
     const fetchCustomer = ()=>{
         let token_data = sessionStorage.getItem('token')
@@ -736,7 +758,8 @@ export const StateProvider = ({children})=>{
         show,
         setQty,
         showLoading, 
-        setShowLoading
+        setShowLoading,
+        checkOut
       }}
     >
             {children}

@@ -10,11 +10,17 @@ import { useEffect } from 'react';
 
 const Cart = () => {
   const cartRef = useRef();
-  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove, response, setRes } = useStateContext();
+  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove, response, setRes, checkOut, setShowLoading } = useStateContext();
 
   useEffect(()=>{
     setRes()
   }, [])
+
+  const handleSubmit = (event)=>{
+    event.preventDefault()
+    setShowLoading(true)
+    checkOut(event)
+  }
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -90,7 +96,7 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="btn">
+              <button type="button" className="btn" onClick={e=>handleSubmit(e)}>
                 Pay with Stripe
               </button>
             </div>

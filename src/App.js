@@ -15,6 +15,8 @@ import ForgetPassword from './components/login/ForgetPassword';
 import VerifyCode from './components/login/VerifyCode';
 import ResetPassword from './components/login/ResetPassword';
 import Customer from './components/dashboard/Customer';
+import Success from './components/Success';
+import Failed from './components/Failed';
 
 const App = () => {
   return (
@@ -28,6 +30,8 @@ const App = () => {
       <Route path='/customer' element={<Customer/>}>
       <Route index path="/customer/*" element={<Dashboard/>} />
       <Route path='/customer/profile' element={<Profile/>} />
+      <Route path='/customer/success' element={<Success/>} />
+      <Route path='/customer/failed' element={<Failed/>} />
       </Route>
       <Route path='/completesignup/*' element={<CompleteSignup/>} />
       <Route path='/emailmsg' element={<EmailMsg/>} />
