@@ -18,7 +18,7 @@ const Body = () => {
       const getItems = async () => {
         const res = await fetch(`${process.env.REACT_APP_SERVER}/items/`)
         const data = await res.json()
-        const items = data.slice(0, 5);
+        const items = data.slice(0, 6);
         setItemCards(items);
         setShowLoading(false)
       }
