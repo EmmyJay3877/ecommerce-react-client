@@ -7,7 +7,9 @@ const Item = ({itemCard: {image, id, name, price, description}}) => {
 
   return (
     <div className="card">
+    <Link to={`/itemdetails/?id=${id}`}>
     <div className="card-img flex justify-center items-center mt-1"><img src={image}/></div>
+    </Link>
     <div className="card-info h-24 flex flex-col justify-end">
       <p className="text-title">{name}</p>
       <p className="text-body text-xs">{description.slice(0, 20)}.....</p>
