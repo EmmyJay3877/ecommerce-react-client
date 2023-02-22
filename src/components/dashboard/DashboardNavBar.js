@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./dashboard.css"
 import Cart from "../Cart"
 import { useStateContext } from '../../StateContext'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
-import { GiHamburgerMenu } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 
 const DashboardNavBar = () => {
 
-    const { showCart, setShowCart, totalQuantities, setLoggedin, updateCart, updateTotalPriceAndQuantity} = useStateContext();
+      const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const toggleMenuOpen = () => document.body.classList.toggle("open");
+      const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+      };
+
+    const { showCart, setShowCart, totalQuantities, setLoggedin, updateCart, updateTotalPriceAndQuantity, customer} = useStateContext();
 
     const removeToken = ()=>{
       sessionStorage.removeItem('token')
@@ -29,23 +32,68 @@ const DashboardNavBar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-overlay" onClick={toggleMenuOpen}></div>
-
-      <button type="button" className="navbar-burger" onClick={()=> {
-        toggleMenuOpen()
-        }}>
-        <span className="material-icon"><GiHamburgerMenu size={30}/></span>
-      </button>
       <Link to={"/customer"}>
       <h1 className="navbar-title">Dynamic Headphones</h1>
       </Link>
       <nav className="navbar-menu">
-        <Link to={'/'}>
-        <button type="button" className='active' onClick={removeToken}>Logout</button>
-        </Link>
-        <Link to={'/customer/profile'}>
-        <button type="button" className="active"><CgProfile size={30}/></button>
-        </Link>
+      <div className="relative inline-block text-left mx-4">
+      <div className='flex justify-center items-center'>
+        <button
+          type="button"
+          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-1 py-1 text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none"
+          id="options-menu"
+          aria-haspopup="true"
+          aria-expanded="true"
+          onClick={toggleDropdown}
+        >
+          <CgProfile size={40}/>
+          <svg
+            className="-mr-1 h-6 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {isDropdownOpen && (
+        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <a href="#" className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform hover:bg-gray-100">
+            <img className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1677076263~exp=1677076863~hmac=17801533b3156b4893eeefc6f67d0eb87d95049649f608ab2a75ff503b136c96" alt="user avatar"/>
+            <div className="mx-1">
+                <h1 className="text-sm font-semibold text-gray-700">{customer.username}</h1>
+                <p className="text-sm text-gray-500">{customer.email}</p>
+            </div>
+        </a>
+        <hr class="border-gray-200 dark:border-gray-700 "/>
+          <div className="py-1" role="none">
+           <Link to={'/customer/profile'}>
+            <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left" role="menuitem">
+              Update Profile
+            </button>
+           </Link>
+            <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left" role="menuitem">
+              View History
+            </button>
+            <hr
+          className="my-2 h-0 border border-t-0 border-solid border-neutral-700 opacity-25 dark:border-neutral-200" />
+            <Link to={'/'}>
+            <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left" role="menuitem" onClick={removeToken}>
+              Sign Out
+            </button>
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+        
         <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
         <svg 
         className="h-8 p-0 text-red-700 hover:text-green-500 duration-200 svg-inline--fa fa-shopping-cart fa-w-18 fa-7x" 
