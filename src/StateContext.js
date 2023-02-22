@@ -168,10 +168,12 @@ export const StateProvider = ({children})=>{
                 window.location.href = `${process.env.REACT_APP_HOST}/customer/`;
             }
             else if('detail' in data){
+                setShowLoading(false)
                 setRes(data.detail)
                 responseTimeOut()
             }
         } catch (error) {
+            setShowLoading(false)
             setRes(errorMsg)
             responseTimeOut()
         }
@@ -272,10 +274,12 @@ export const StateProvider = ({children})=>{
                 );
             }
             else if('detail' in data){
+                setShowLoading(false)
                 setRes(data.detail)
                 responseTimeOut()
             }
         } catch(error){
+            setShowLoading(false)
             setRes(errorMsg)
             responseTimeOut()
         }
@@ -301,6 +305,7 @@ export const StateProvider = ({children})=>{
                 alert(data['detail'])
             }
         } catch (error) {
+            setShowLoading(false)
             alert(errorMsg)
         }
     }
@@ -512,19 +517,17 @@ export const StateProvider = ({children})=>{
                 }).then(
                 async message =>{ 
                     console.log(message)
-
                     setShowLoading(false)
-
                     await deleteCode(id)
-                }
-                );
-
+                });
             }
                 else if ('detail' in data){
+                    setShowLoading(false)
                     setRes(data.detail)
                     responseTimeOut()
                 }
         } catch (error) {
+            setShowLoading(false)
             setRes(errorMsg)
             responseTimeOut()
         }
@@ -614,6 +617,7 @@ export const StateProvider = ({children})=>{
                     setShow(true)
                 }
             } catch (error) {
+                setShowLoading(false)
                 setRes(`${errorMsg}. Could not update profile`)
                 responseTimeOut()
             }
@@ -654,6 +658,7 @@ export const StateProvider = ({children})=>{
                     }
                 } else if(statusCode===401) setShow(true)
             }catch (error){
+                setShowLoading(false)
                 setPswrdResponse(`${errorMsg}, could not update password`)
                 setTimeout(() => {
                     setPswrdResponse('')
