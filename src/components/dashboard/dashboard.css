@@ -66,13 +66,12 @@ button {
 
 .navbar-menu {
   position: static;
-  margin: 0 10px;
   translate: 0 0;
   width: auto;
   background: transparent;
   flex-direction: row;
   visibility: visible;
-  padding: 30px;
+  padding: 5px;
   display: flex;
   justify-content: center;
 }
