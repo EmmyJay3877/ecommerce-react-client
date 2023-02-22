@@ -60,7 +60,7 @@ const Proceed = () => {
             </div>
             </div>
             :
-        <div className="h1"> An Error has occured</div>
+        <div>Please Wait......</div>
         }
     </div>
   )

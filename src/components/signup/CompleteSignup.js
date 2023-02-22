@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import { useStateContext } from '../../StateContext';
+import LoadingIcon from '../LoadingIcon';
 
 const CompleteSignup = () => {
 
-    const { completeSignup, setRes, response } = useStateContext()
+    const { completeSignup, setRes, response, showLoading, setShowLoading } = useStateContext()
 
     const [ formData, setFormData ] = useState({
         phone: '',
@@ -16,6 +17,7 @@ const CompleteSignup = () => {
 
     useEffect(()=>{
       setRes()
+      setShowLoading(false)
     }, [])
 
     const [searchparams] = useSearchParams()
@@ -44,6 +46,7 @@ const CompleteSignup = () => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
+            setShowLoading(true)
             // Submit the form data here
             await completeSignup(event, token_data)
             let inputs = document.querySelectorAll("input")
@@ -121,7 +124,7 @@ const CompleteSignup = () => {
               type='submit' 
               className="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
               onClick={e=> handleSubmit(e)}
-              >Submit</button>
+              >{showLoading===true ? <LoadingIcon/> : 'Submit'}</button>
           </div>
         </div>
         </form>

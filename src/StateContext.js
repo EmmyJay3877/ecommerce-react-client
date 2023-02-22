@@ -328,9 +328,11 @@ export const StateProvider = ({children})=>{
                 const data = await res.json()
                 const statusCode = await res.status
                 if (statusCode === 201 && 'data' in data) {
+                    setShowLoading(false)
                     window.location.href = `${process.env.REACT_APP_HOST}/customer/`;
                 }
             } catch (error) {
+                setShowLoading(false)
                 setRes(errorMsg)
                 responseTimeOut()
             }
