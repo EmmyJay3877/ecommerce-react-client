@@ -5,6 +5,7 @@ import { useStateContext } from '../../StateContext'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { CgProfile } from 'react-icons/cg'
 
 const DashboardNavBar = () => {
 
@@ -43,7 +44,7 @@ const DashboardNavBar = () => {
         <button type="button" className='active' onClick={removeToken}>Logout</button>
         </Link>
         <Link to={'/customer/profile'}>
-        <button type="button" className="active">Update Profile</button>
+        <button type="button" className="active"><CgProfile size={30}/></button>
         </Link>
         <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
         <svg 
