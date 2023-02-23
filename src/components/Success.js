@@ -6,12 +6,10 @@ import { useEffect } from 'react';
 
 const Success = () => {
 
-  const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext()
+  const { verifyPayment } = useStateContext()
 
   useEffect(()=>{
-    setCartItems([]);
-    setTotalPrice(0);
-    setTotalQuantities(0);
+    verifyPayment()
   }, [])
 
   return (

@@ -310,6 +310,26 @@ export const StateProvider = ({children})=>{
         }
     }
 
+    const verifyPayment = async () => {
+        let token_data = sessionStorage.getItem('token')
+        try {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/check-payment-status`, {
+                method: "POST",
+                headers: {
+                    'Authorization': `Bearer ${token_data}`
+                }
+            }) 
+            const statusCode = await res.status
+            if (statusCode===200) {
+                setCartItems([])
+                setTotalPrice(0);
+                setTotalQuantities(0);
+            }
+        } catch (error) {
+            alert(errorMsg)
+        }
+    }
+
     const completeSignup = (event, token_data)=>{
         event.preventDefault()
         const phone = event.target.form.elements.phone.value;
@@ -766,7 +786,8 @@ export const StateProvider = ({children})=>{
         setQty,
         showLoading, 
         setShowLoading,
-        checkOut
+        checkOut,
+        verifyPayment
       }}
     >
             {children}
