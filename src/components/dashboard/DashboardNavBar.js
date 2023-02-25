@@ -82,16 +82,18 @@ const DashboardNavBar = () => {
                 <p className="text-sm text-gray-500">{customer.email}</p>
             </div>
         </a>
-        <hr class="border-gray-200 dark:border-gray-700 "/>
+        <hr className="border-gray-200 dark:border-gray-700 "/>
           <div className="py-1" role="none">
            <Link to={'/customer/profile'}>
             <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left" role="menuitem">
               Update Profile
             </button>
            </Link>
+           <Link to={'/customer/history'}>
             <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left" role="menuitem">
               View History
             </button>
+           </Link>
             <hr
           className="my-2 h-0 border border-t-0 border-solid border-neutral-700 opacity-25 dark:border-neutral-200" />
             <Link to={'/'}>

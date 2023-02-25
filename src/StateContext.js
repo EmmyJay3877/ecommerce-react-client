@@ -16,6 +16,7 @@ export const StateProvider = ({children})=>{
     const [show, setShow] = useState(false);
     const [interValId, setIntervalId] = useState(null)
     const [showLoading, setShowLoading] = useState(false)
+    const [history, setHistory] = useState([])
 
     const handleClose = ()=> {
       setShow(false);
@@ -298,6 +299,7 @@ export const StateProvider = ({children})=>{
             const data = await res.json()
             const statusCode = await res.status
             if (statusCode === 201){
+                createHistory('A checkout session was created ✅.')
                 setShowLoading(false)
                 window.location.href = data
             } else if (statusCode !== 201 && 'detail' in data) {
@@ -321,6 +323,7 @@ export const StateProvider = ({children})=>{
             }) 
             const statusCode = await res.status
             if (statusCode===200) {
+                createHistory('Payment was successful ✅ and order is being proccessed 🔃')
                 setCartItems([])
                 setTotalPrice(0);
                 setTotalQuantities(0);
@@ -606,6 +609,47 @@ export const StateProvider = ({children})=>{
         }
     }
 
+    const getHistory = async ()=>{
+        let token_data = sessionStorage.getItem('token')
+        try {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/get_history`, {
+                headers: {'Authorization': `Bearer ${token_data}`}
+            })
+            const data = await res.json()
+            const statusCode = res.status
+            if (data && statusCode===200) {
+                setShowLoading(false)
+                setHistory(data.reverse())
+            }
+            if (statusCode===404){
+                setShowLoading(false)
+                setHistory()
+            }
+        } catch (error) {
+            alert(errorMsg)
+        }
+    }
+
+    const createHistory = async (history)=>{
+        let token_data = sessionStorage.getItem('token')
+        try {
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/customers/history`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token_data}`
+                },
+                body: JSON.stringify({"data": history})
+            })
+            const statusCode = await res.status
+            if (statusCode===201) {
+                getHistory()
+            }
+        } catch (error) {
+            alert(errorMsg)
+        }
+    }
+
     const updateProfile = (event) => {
         event.preventDefault()
         const phone = event.target.form.elements.phone.value;
@@ -631,6 +675,7 @@ export const StateProvider = ({children})=>{
                 if (statusCode === 200 && data){
                     setShowLoading(false)
                      setRes(data.data)
+                     createHistory(data.history)
                     }
                 else if(statusCode===401) {
                     setShowLoading(false)
@@ -671,6 +716,7 @@ export const StateProvider = ({children})=>{
                         window.location.href = `${process.env.REACT_APP_HOST}/login/`;
                     } else{
                         setShowLoading(false)
+                        createHistory(data.history)
                         setPswrdResponse(data.data)
                         setTimeout(() => {
                             setPswrdResponse('')
@@ -787,7 +833,9 @@ export const StateProvider = ({children})=>{
         showLoading, 
         setShowLoading,
         checkOut,
-        verifyPayment
+        verifyPayment,
+        getHistory,
+        history
       }}
     >
             {children}

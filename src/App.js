@@ -17,6 +17,7 @@ import ResetPassword from './components/login/ResetPassword';
 import Customer from './components/dashboard/Customer';
 import Success from './components/Success';
 import Failed from './components/Failed';
+import History from './components/History';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
       <Route path='/customer/profile' element={<Profile/>} />
       <Route path='/customer/success' element={<Success/>} />
       <Route path='/customer/failed' element={<Failed/>} />
+      <Route path='/customer/history' element={<History/>} />
       </Route>
       <Route path='/completesignup/*' element={<CompleteSignup/>} />
       <Route path='/emailmsg' element={<EmailMsg/>} />
