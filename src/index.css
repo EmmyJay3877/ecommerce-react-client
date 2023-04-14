@@ -144,12 +144,12 @@ width: 99%;
 
 .hero-banner-container{
   padding: 100px 40px;
-  background-color: #dcdcdc;
+  background-color: rgb(245, 244, 244);
   border-radius: 15px;
   position: relative;
   height: 500px;
   line-height: 0.9; 
-  width: 100%;
+  width: auto;
 
 }
 .hero-banner-container .beats-solo{
@@ -173,7 +173,7 @@ width: 99%;
   margin-top: 4px;
 }
 .hero-banner-container h1{
-  color: white;
+  color: rgb(53, 27, 27);
   font-size: 10em;
   margin-left: -20px;
   text-transform: uppercase;
