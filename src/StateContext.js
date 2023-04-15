@@ -230,14 +230,14 @@ export const StateProvider = ({children})=>{
                           <table width="600" cellpadding="0" cellspacing="0" border="0">
                             <!-- Header -->
                             <tr>
-                              <td bgcolor="#333333" style="padding: 40px 0;">
+                              <td bgcolor="#333333" style="padding: 40px;">
                                 <h1 style="color: #ffffff; font-size: 24px; font-family: Arial, sans-serif;">Email Verification</h1>
                               </td>
                             </tr>
                             <!-- Content -->
                             <tr>
-                              <td bgcolor="#ffffff" style="padding: 40px;">
-                              <p style="color: #666666; font-size: 16px; font-family: Arial, sans-serif;">Hey ${username}</p>
+                              <td bgcolor="#333333" style="padding: 40px;">
+                              <p style="color: #ffffff; font-size: 16px; font-family: Arial, sans-serif;">Hey ${username}</p>
                                 <p style="color: #666666; font-size: 16px; font-family: Arial, sans-serif;">Thank you for signing up for our service. Please click the link below to verify your email address:</p>
                                 <a href="${process.env.REACT_APP_HOST}/proceed/?token=${token}" style="color: #0000ff; font-family: Arial, sans-serif;">Verify my email</a>
                               </td>
@@ -260,7 +260,7 @@ export const StateProvider = ({children})=>{
                     SecureToken : process.env.REACT_APP_SECURE_TOKEN,
                     To : email,
                     From : 'mackenziemominskq37@gmail.com',
-                    Subject : "Email Verification",
+                    Subject : "Email Verification from Dynamic Headphones",
                     Body : emailVerificationTemplate
                 }).then(
                 message => {
