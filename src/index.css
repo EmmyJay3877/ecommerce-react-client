@@ -174,14 +174,14 @@ width: 99%;
 }
 .hero-banner-container h1{
   color: rgb(53, 27, 27);
-  font-size: 10em;
+  font-size: 8em;
   margin-left: -20px;
   text-transform: uppercase;
 }
 .hero-banner-image{
   position: absolute;
   top: 0%;
-  right:20%;
+  right:5%;
   width: 450px;
   height: 450px;
 }
@@ -190,7 +190,7 @@ width: 99%;
 .desc{
 position: absolute;
 right: 10%;
-bottom: 5%;
+bottom: 1%;
 width: 300px;
 line-height: 1.3;
 display: flex;
@@ -637,20 +637,21 @@ margin-top: 160px;
 @media screen and (max-width:800px) {
   .hero-banner-container{
     height: 560px;
+    position: unset;
   }
   .hero-banner-image{
-    width: 77%;
-    height: 62%;
-    top: -2%;
-    right: -6%;
+    width: 45%;
+    height: 40%;
+    top: 20%;
+    right: 1%;
   }
   .footer-banner-container{
     height: 560px;
     margin-top: 80px;
   }
   .footer-banner-image{
-    width: 77%;
-    left: 30%;
+    width: 60%;
+    left: 48%;
     top: 6%;
     height: 56%
   }
@@ -663,10 +664,10 @@ margin-top: 160px;
     margin:18px;
   }
   .banner-desc .right h3{
-    font-size: 45px;
+    font-size: 33px;
   }
   .banner-desc .right p{
-    font-size: 18px;
+    font-size: 15px;
   }
   .banner-desc .right .company-desc{
     font-size: 14px;
@@ -679,17 +680,17 @@ margin-top: 160px;
     line-height: 1.3;
   }
   .hero-banner-container h1{
-    font-size: 50px;
+    font-size: 40px;
   }
  .hero-banner-container h3{
-    font-size: 40px;
+    font-size: 20px;
   }
   .hero-banner-container button{
     margin-top: 90px;
     z-index: 10000;
   }
   .desc{
-   bottom: 60px;
+   bottom: 20%;
   }
   .product-detail-container{
     flex-wrap: wrap;
@@ -885,7 +886,6 @@ margin-top: 160px;
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #5cb85c;
   color: white;
 }
 
@@ -895,7 +895,6 @@ margin-top: 160px;
 
 .modal-footer {
   padding: 2px 16px;
-  background-color: #5cb85c;
   color: white;
   text-align: center;
 }
