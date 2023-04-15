@@ -88,7 +88,8 @@ const Login = () => {
       onClick={(e) =>handleSubmit(e)}
       type='submit'
       >{showLoading===true ? <LoadingIcon/> : 'Login'}</button>
-      <div className="flex mt-6 justify-center text-xs">
+      <div className="flex mt-6 justify-center items-center space-y-4 flex-col text-xs">
+        <div>
         <Link to={'/forgetpassword'}>
         <button className="text-blue-400 hover:text-blue-500 cursor-pointer">Forgot Password</button>
         </Link>
@@ -96,6 +97,12 @@ const Login = () => {
         <Link to={'/signup'}>
         <button className="text-blue-400 hover:text-blue-500" >Sign Up</button>
         </Link>
+        </div>
+        <div>
+        <Link to={'/'}>
+        <button className="text-blue-400 hover:text-blue-500">Go back 🔙</button>
+        </Link>
+        </div>
       </div>
     </form>
   

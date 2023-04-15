@@ -119,12 +119,19 @@ const Signup = () => {
       onClick={(e) =>handleSubmit(e)}
       type='submit'
       >{showLoading===true ? <LoadingIcon/> : 'Signup'}</button>
-      <div className="flex mt-6 justify-center text-xs">
+      <div className="flex mt-6 justify-center items-center flex-col text-xs space-y-4">
+        <div>
         <a className="text-black">Already have an account?  </a>
         &nbsp;
         <Link to={'/login'}>
         <button className="text-blue-400 hover:text-blue-500" >Log in</button>
         </Link>
+        </div>
+        <div>
+        <Link to={'/'}>
+        <button className="text-blue-400 hover:text-blue-500">Go back 🔙</button>
+        </Link>
+        </div>
       </div>
     </form>
   </div>
