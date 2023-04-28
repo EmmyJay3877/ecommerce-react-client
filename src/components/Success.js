@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import { BsBagCheckFill } from 'react-icons/bs';
 import { useStateContext } from '../StateContext';
 import { useEffect } from 'react';
+import { io } from 'socket.io-client'
+
+const socket = io('ws://127.0.0.1:8000', {path: '/ws/socket.io', autoConnect: false});
 
 const Success = () => {
 
@@ -11,6 +14,18 @@ const Success = () => {
   useEffect(()=>{
     verifyPayment()
   }, [])
+
+  useEffect(()=>{
+
+    socket.connect();
+
+    socket.emit('send_notification')
+
+    return () => {
+          socket.disconnect();
+        }
+  }, [])
+  
 
   return (
     <div className="success-wrapper">

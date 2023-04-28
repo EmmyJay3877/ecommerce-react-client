@@ -1,6 +1,7 @@
 import React from 'react'
 import { createContext, useContext, useState, useEffect } from 'react'
 
+
 const StateContext = createContext();
 
 export const StateProvider = ({children})=>{
@@ -769,6 +770,7 @@ export const StateProvider = ({children})=>{
             setTotalQuantities(0)
         }
     }
+
 
     useEffect(()=>{
         updateTotalPriceAndQuantity()
