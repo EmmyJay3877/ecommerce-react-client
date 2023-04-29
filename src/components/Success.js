@@ -5,7 +5,7 @@ import { useStateContext } from '../StateContext';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client'
 
-const socket = io('ws://127.0.0.1:8000', {path: '/ws/socket.io', autoConnect: false});
+const socket = io(`${process.env.REACT_APP_SOCKET_SERVER}`, {path: '/ws/socket.io', autoConnect: false});
 
 const Success = () => {
 
