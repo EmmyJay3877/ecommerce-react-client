@@ -3,6 +3,10 @@
 
 Welcome to the Ecommerce Client repository! This project provides a dynamic and user-friendly web interface for interacting with the FastAPI Ecommerce Server 👉 https://github.com/EmmyJay3877/ecommerce-fastapi-server 👈. Built with React, React Router, Socket.IO Client, Context API, and styled with Tailwind CSS, this client application offers seamless navigation, real-time updates, and an appealing UI for managing products, customers, and orders. This README will guide you through setting up and running the client application.
 
+## 🚀 Demo
+
+https://ecommerce-react-client.netlify.app/
+
 
 ## Features
 
