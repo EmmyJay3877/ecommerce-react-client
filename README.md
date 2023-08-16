@@ -96,9 +96,3 @@ The client application will be accessible at http://localhost:3000
 Contributions are always welcome!
 
 If you find any bugs or want to add new features, feel free to submit a pull request.
-
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
